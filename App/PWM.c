@@ -133,8 +133,14 @@ void TIM2_12864_Init(void)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE );
 	
-	TIM_TimeBaseStructure.TIM_Prescaler = 71;        			//72分频
-	TIM_TimeBaseStructure.TIM_Period = 200;//311; //155;  				//自动重装寄存器周期值;0.312ms采集一次
+	  //分频7200，用72000000/7200=10000Hz
+   //此时的周期就是1/10000=0.0001s
+   //500ms=0.0001s*5000次
+   //5000-1=4999次
+   //即通过4999次系统的运行，就是500ms
+	
+	TIM_TimeBaseStructure.TIM_Prescaler = 7199;        			//72分频
+	TIM_TimeBaseStructure.TIM_Period = 9999;								//311; //155;  				//自动重装寄存器周期值;0.312ms采集一次				//*****修改闪烁时间*****		这里填=9999*想要的时间（s）
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;				//时钟分割
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;	//向上计数模式
 	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);				 //初始化定时器2

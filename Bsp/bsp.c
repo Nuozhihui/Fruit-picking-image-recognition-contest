@@ -324,9 +324,9 @@ void BSP_RCC_Configuration(void)
 *********************************************************************************************************/
 void Alarm_Ctrl(void)
 {
-	GPIO_SetBits(GPIOC, BSP_GPIOC_BUZZER);
-	Delay(300);
-    GPIO_ResetBits(GPIOC, BSP_GPIOC_BUZZER);
+	GPIO_SetBits(GPIOC, BSP_GPIOC_BUZZER);			
+	Delay(500);																//********·äÃùÆ÷Ê±¼ä******
+  GPIO_ResetBits(GPIOC, BSP_GPIOC_BUZZER);
 }
 
 

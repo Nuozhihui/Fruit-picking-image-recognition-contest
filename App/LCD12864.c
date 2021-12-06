@@ -28,7 +28,7 @@
 /* Private variables ---------------------------------------------------------*/
 // 液晶显示预定义数组;
 unsigned char LCD_Line[16] ={"                "};
-unsigned char LCD_Start[4][16] ={"  采摘机器人    ", "工位号：00      ", "                ","按E 键进入主界面" };
+unsigned char LCD_Start[4][16] ={"  采摘机器人    ", "工位号：999     ", "                ","按E 键进入主界面" };				//****修改工位号*****
 unsigned char LCD_Main[4][18]  ={"1.区域设定A      ", "2.手动采摘B      ", "3.自动采摘C      ", "4.校准D          "};
 unsigned char LCD_Set[4][16]   ={"起点坐标：      ", "                ", "终点坐标：      ", "                "};
 unsigned char LCD_State[4][16] ={"机械手坐标：    ", "                ", "数量：          ", "压力：          "};
