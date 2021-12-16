@@ -90,7 +90,7 @@ int main(void)
 			key_scan();					//独立按键数值读取	
 			
 			
-			switch(Set_flag)
+			switch(Set_flag)						//需要设置应用标志位
 			{	
 				case 0:		Set0_Home();		// 主界面 ;
 					break;

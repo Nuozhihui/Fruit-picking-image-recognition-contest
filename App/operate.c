@@ -21,6 +21,62 @@
 #include  "operate.h"
 /* Private variables ---------------------------------------------------------*/
 
+//主界面程序
+u16 ix;
+
+void Regional_Settings()		//区域设定
+{
+	
+	key_val=0;
+	Set_flag=1;		LCD_flag=2;
+	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);	//使能时钟TIM2定时中断源中断
+	TIM_Cmd(TIM2, ENABLE);											//使能定时器2
+
+}
+
+void Manual_picking()		//手动采摘
+{
+	
+		key_val=0;
+		Set_flag=2;		LCD_flag=3;
+		AuRun_Flag=1;//归零位;
+		Run_Num=0;// 果实计数清零;
+		for(ix = 0; ix < Pick_NumMax; ix++)
+		{
+			Pick_DaX[ix]=0;
+			Pick_DaY[ix]=0;
+		}
+
+}
+
+void Automatic_picking()		//自动采摘
+{
+			key_val=0;
+			Set_flag=3;		LCD_flag=3;
+			AuRun_Flag=1;//归零位;
+			Auto_end=0;
+			Run_Num=0;// 果实计数清零;
+			for(ix = 0; ix < Pick_NumMax; ix++)
+			{
+				Pick_DaX[ix]=0;
+				Pick_DaY[ix]=0;
+			}
+}
+
+void  calibration()		//校准
+{
+	
+		key_val=0;
+		Set_flag=4;		LCD_flag=5;
+
+		AuRun_Flag=1;//归零位;// 电机动作:1-归零位(上电仅一次);2-手动操作;3-归区域零点;4-自动运行;5-归追踪前位置;6-追踪目标;
+
+		//// 使能ADC的DMA1的请求;
+		TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);	//使能时钟TIM2定时中断源中断
+		TIM_Cmd(TIM2, ENABLE);											//使能定时器2
+}
+
+
 /**********************************************************************************************************
 * Function    ：void Set0_Home(void)
 * Description : 主界面程序
@@ -30,47 +86,22 @@
 **********************************************************************************************************/
 void Set0_Home(void)
 {
-		u16 ix;
+		
 		switch(key_val)
 		{
 			case 10:// 1.区域设定 ;
-							key_val=0;
-							Set_flag=1;		LCD_flag=2;
-							TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);	//使能时钟TIM2定时中断源中断
-							TIM_Cmd(TIM2, ENABLE);											//使能定时器2
+				Regional_Settings();		
 				break;
+			
 			case 11:// 2.手动采摘 ;
-							key_val=0;
-							Set_flag=2;		LCD_flag=3;
-							AuRun_Flag=1;//归零位;
-							Run_Num=0;// 果实计数清零;
-							for(ix = 0; ix < Pick_NumMax; ix++)
-							{
-								Pick_DaX[ix]=0;
-								Pick_DaY[ix]=0;
-							}
+				Manual_picking();
 				break;
+			
 			case 12:// 3.自动采摘 ;
-							key_val=0;
-							Set_flag=3;		LCD_flag=3;
-							AuRun_Flag=1;//归零位;
-							Auto_end=0;
-							Run_Num=0;// 果实计数清零;
-							for(ix = 0; ix < Pick_NumMax; ix++)
-							{
-								Pick_DaX[ix]=0;
-								Pick_DaY[ix]=0;
-							}
+					Automatic_picking();
 				break;
 			case 6:// 4.校准 ;
-							key_val=0;
-							Set_flag=4;		LCD_flag=5;
-			
-							AuRun_Flag=1;//归零位;// 电机动作:1-归零位(上电仅一次);2-手动操作;3-归区域零点;4-自动运行;5-归追踪前位置;6-追踪目标;
-			
-							//// 使能ADC的DMA1的请求;
-							TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);	//使能时钟TIM2定时中断源中断
-							TIM_Cmd(TIM2, ENABLE);											//使能定时器2
+							calibration();
 				break;
 			default:break;
 		}

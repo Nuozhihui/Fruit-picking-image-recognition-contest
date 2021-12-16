@@ -494,6 +494,7 @@ void LCD_Display_Fresh(void)
 			else
 			for(i=0;i<16;i++)	LCD_WriteData(LCD_Line[i]);
 			break;
+			
 		case 1:// ************** 主界面; ************************************************//
 			LCD_Position(1,0);
 			for(i=0;i<16;i++)	LCD_WriteData(LCD_Main[0][i]);
@@ -507,6 +508,7 @@ void LCD_Display_Fresh(void)
 			LCD_Position(4,0);
 			for(i=0;i<16;i++)	LCD_WriteData(LCD_Main[3][i]);
 			break;
+		
 		case 2:// ************** 区域设定界面; ***********************************************//
 			if(LCD_Ying)
 			{
@@ -687,6 +689,7 @@ void LCD_Display_Fresh(void)
 				for(i=9;i<16;i++)	LCD_WriteData(LCD_Set[3][i]);
 			}
 			break;
+			
 		case 3:// ************** 实时状态界面; ************************************************//
 			LCD_Position(1,0);
 			for(i=0;i<16;i++)	LCD_WriteData(LCD_State[0][i]);
@@ -718,6 +721,7 @@ void LCD_Display_Fresh(void)
 			LCD_WriteData('V');
 			for(i=11;i<16;i++)	LCD_WriteData(LCD_State[3][i]);
 			break;
+			
 		case 4:// ************** 自动采摘结果界面; ************************************************//
 				LCD_Clear_Screen();	   //清屏函数 防止乱码
 				clear_gdram();
@@ -737,6 +741,7 @@ void LCD_Display_Fresh(void)
 				}
 				LCD_flag=6;
 			break;
+				
 		case 5:// ************** 校准界面; ************************************************//
 			if(LCD_Ying)
 			{
